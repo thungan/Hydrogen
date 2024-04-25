@@ -2,6 +2,7 @@ import {CartForm, Image, Money} from '@shopify/hydrogen';
 import {Link} from '@remix-run/react';
 import {useVariantUrl} from '~/lib/variants';
 
+
 /**
  * @param {CartMainProps}
  */
