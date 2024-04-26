@@ -6,6 +6,9 @@ import {
   Image,
   Money,
 } from '@shopify/hydrogen';
+
+
+
 import {useVariantUrl} from '~/lib/variants';
 
 /**
