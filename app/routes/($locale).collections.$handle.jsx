@@ -100,7 +100,7 @@ function ProductItem({product, loading}) {
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   return (
     <Link
-      className="product-item"
+      className="product-item fgc2222"
       key={product.id}
       prefetch="intent"
       to={variantUrl}
@@ -114,7 +114,11 @@ function ProductItem({product, loading}) {
           sizes="(min-width: 45em) 400px, 100vw"
         />
       )}
-      <h4>{product.title}</h4>
+      <div fgc_key={product.id} >
+      <h4 class="444">{product.title}</h4>
+      <Link to={`/products/${product.handle}`}>{product.title}</Link>
+      </div>
+
       <small>
         <Money data={product.priceRange.minVariantPrice} />
       </small>

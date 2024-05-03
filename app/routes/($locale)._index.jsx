@@ -29,9 +29,46 @@ export default function Homepage() {
     <div className="home">
       <FeaturedCollection collection={data.featuredCollection} />
       <RecommendedProducts products={data.recommendedProducts} />
+       /**ko lam viec*/
+  
     </div>
   );
 }
+
+/**list collection*/
+/**
+ * @param {{
+ *   collection: CollectionFragment;
+ *   index: number;
+ * }}
+ */
+function CollectionItem({ collection, index }) {
+  return (
+    <div className="collection-item">
+    /**     to={`/collections/${collection.handle}`}   dang loi o day; handle ko dc dn */
+      <Link
+   
+        prefetch="intent"
+        className="collection-image-link"
+      >
+        {collection.image && (
+          <Image
+            alt={collection.image.altText || collection.title}
+            aspectRatio="1/1"
+            data={collection.image}
+            loading={index < 3 ? 'eager' : undefined}
+          />
+        )}
+        <h5>{collection.title}</h5>
+      </Link>
+      <details>
+        <summary>View Collection</summary>
+        <p>{collection.description}</p>
+      </details>
+    </div>
+  );
+}
+
 
 /**
  * @param {{
@@ -94,6 +131,25 @@ function RecommendedProducts({products}) {
     </div>
   );
 }
+
+/*add by thungan*/
+
+
+const COLLECTIONS_QUERY = `#graphql
+  fragment Collection on Collection {
+    id
+    title
+    handle
+    image {
+      id
+      url
+      altText
+      width
+      height
+    }
+  }
+`;
+/*end*/
 
 const FEATURED_COLLECTION_QUERY = `#graphql
   fragment FeaturedCollection on Collection {

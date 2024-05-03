@@ -28,6 +28,10 @@ export async function loader({request, context}) {
     variables: {...paginationVariables},
   });
 
+
+
+
+
   return json({products});
 }
 
@@ -100,7 +104,11 @@ function ProductItem({product, loading}) {
           sizes="(min-width: 45em) 400px, 100vw"
         />
       )}
-      <h4>{product.title}</h4>
+        <div fgc_key={product.id} >
+      <h4 class="444">{product.title}</h4>
+      <Link to={`/products/${product.handle}`}>{product.title}</Link>
+      </div>
+
       <small>
         <Money data={product.priceRange.minVariantPrice} />
       </small>

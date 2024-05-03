@@ -147,7 +147,7 @@ function ProductImage({image}) {
 function ProductMain({selectedVariant, product, variants}) {
   const {title, descriptionHtml} = product;
   return (
-    <div className="product-main">
+    <div className="product-main" fgc-123={product.productType} >
       <h1>{title}</h1>
       <ProductPrice selectedVariant={selectedVariant} />
       <br />
@@ -358,6 +358,7 @@ const PRODUCT_FRAGMENT = `#graphql
     title
     vendor
     handle
+    productType
     descriptionHtml
     description
     options {
