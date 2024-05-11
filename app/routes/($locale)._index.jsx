@@ -16,54 +16,43 @@ export const meta = () => {
 export async function loader({context}) {
   const {storefront} = context;
   const {collections} = await storefront.query(FEATURED_COLLECTION_QUERY);
-  /**const featuredCollection = await storefront.query(FEATURED_COLLECTION_QUERY);*/
-  const featuredCollection = collections.nodes[0];/** get the first collection*/
+  const featuredCollection = await storefront.query(FEATURED_COLLECTION_QUERY);
+  const featuredCollection1 = collections.nodes[0];/** get the first collection*/
   const recommendedProducts = storefront.query(RECOMMENDED_PRODUCTS_QUERY);
   
      const fgc123 =  await storefront.query(COLLECTIONS_QUERY);
-      return defer({featuredCollection, recommendedProducts, fgc123});
+      return defer({featuredCollection, recommendedProducts, fgc123,featuredCollection1});
 }
 
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();  
   const dd = data.fgc123.collections;
+  const hh = data.featuredCollection.collections;
   /**console.log(data.recommendedProducts)*/
- /** console.log(data.fgc123.collections)*/
+ console.log(hh)
+
   return (
     <div className="home">
      
-      <listCollectons123  aaa={data.fgc123.collections} /> 
+     
 
         <section className="w-full gap-4">
       <h2 className="whitespace-pre-wrap max-w-prose font-bold text-lead">
         3 Collections
       </h2>
-      <div className="grid-flow-row grid gap-2 gap-y-6 md:gap-4 lg:gap-6 grid-cols-1 sm:grid-cols-3">
-        {dd.nodes.map((collection) => {
+         <div className="grid-flow-row grid gap-2 gap-y-6 md:gap-4 lg:gap-6 grid-cols-1 sm:grid-cols-3">
+        {hh.nodes.map((collection) => {
           return (
             <Link to={`/collections/${collection.handle}`} key={collection.id}>
-              <div className="grid gap-4">
-                {collection?.image && (
-                  <Image
-                    alt={`Image of ${collection.title}`}
-                    data={collection.image}
-                    key={collection.id}
-                    sizes="(max-width: 32em) 100vw, 33vw"
-                    crop="center"
-                  />
-                )}
-                <h2 className="whitespace-pre-wrap max-w-prose font-medium text-copy">
-                  {collection.title}
-                </h2>
-              </div>
+              {collection.title}
             </Link>
           );
         })}
       </div>
     </section>
-<FeaturedCollectionfgc  a="test by thungan"/>
-      <FeaturedCollection123 collection={data.featuredCollection} />
+      <FeaturedCollectionfgc  a="test by thungan"/>
+      <FeaturedCollection123 collection={data.featuredCollection1} />
       <RecommendedProducts products={data.recommendedProducts} />           
       
 
@@ -77,7 +66,7 @@ export default function Homepage() {
  *   collections: listCollectons;
  * }}
  */
-function listCollectons123({aaa}) {
+function ListCollectons123({aaa}) {
   return (
       <section className="w-full gap-4">
       <h2 className="whitespace-pre-wrap max-w-prose font-bold text-lead">
@@ -178,7 +167,7 @@ function RecommendedProducts({products}) {
 
 
 const COLLECTIONS_QUERY = `#graphql
-  query FeaturedCollections {
+  query FeaturedCollections{
     collections(first: 3, query: "collection_type:smart") {
       nodes {
         id
