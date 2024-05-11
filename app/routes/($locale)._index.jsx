@@ -27,10 +27,11 @@ export async function loader({context}) {
 export default function Homepage() {
   /** @type {LoaderReturnData} */
   const data = useLoaderData();  
-  const dd = data.fgc123.collections;
+  const dd = data.fgc123.collections; /**ko use dc khi lk voi shopy
+*/
   const hh = data.featuredCollection.collections;
   /**console.log(data.recommendedProducts)*/
- console.log(hh)
+ console.log(dd)
 
   return (
     <div className="home">
@@ -43,9 +44,25 @@ export default function Homepage() {
       </h2>
          <div className="grid-flow-row grid gap-2 gap-y-6 md:gap-4 lg:gap-6 grid-cols-1 sm:grid-cols-3">
         {hh.nodes.map((collection) => {
-          return (
+         return (
             <Link to={`/collections/${collection.handle}`} key={collection.id}>
-              {collection.title}
+              <div className="grid gap-4">
+                {collection?.image && (
+                  <Image
+                    alt={`Image of ${collection.title}`}
+                    data={collection.image}
+                    key={collection.id}
+                    sizes="(max-width: 200px) 20vw, 50vw"
+                    aspectRatio="1/1"
+                    crop="center"
+                    className="image-collections"
+                  />
+
+                )}
+                <h2 className="whitespace-pre-wrap max-w-prose font-medium text-copy">
+                  {collection.title}
+                </h2>
+              </div>
             </Link>
           );
         })}

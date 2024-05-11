@@ -466,3 +466,10 @@ aside li {
 .account-logout {
   display: inline-block;
 }
+
+
+
+img.image-collections {
+    max-width: 640px;
+    height: 360px;
+}
