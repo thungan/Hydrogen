@@ -99,6 +99,11 @@ function ArticleItem({article, loading}) {
           </div>
         )}
         <h3>{article.title}</h3>
+        <div
+        dangerouslySetInnerHTML={{__html: article.contentHtml.substring(0, 200)}}
+        className="article-des"
+      >
+    </div>
         <small>{publishedAt}</small>
       </Link>
     </div>
